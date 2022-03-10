@@ -44,14 +44,14 @@ double arctan(double liczba, double krok){
     return fastpot(-1, krok-1)*(fastpot(liczba, ((2*krok)-1))/((2*krok)-1));
 }
 
-double zad1(double x, int kroki){
+double zad2(double x, int kroki){
     double sumlog = 0;
     double sumarc = 0;
     double wynik = 0;
-    for(int i=1; i<kroki+1; i++){
+    for(int i=kroki; i>=1; i--){
         sumlog += logn(x, i);
         sumarc += arctan(x, i);
-        // std::cout<<"log: "<<logn(x,i)<<std::endl<<"arctan: "<<arctan(x,i)<<std::endl;
+        std::cout<<"log: "<<logn(x,i)<<std::endl<<"arctan: "<<arctan(x,i)<<std::endl;
     }
     wynik = sumarc * sumlog;
     return wynik;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     double number = 0.1;
     int kroki = 0;
     std::cin>>kroki;
-    double w = zad1(number, kroki);
+    double w = zad2(number, kroki);
     std::cout<<"0.0094994371897874237131657982374337312586560454954487194634"<<std::endl;
     std::cout<<w<<std::endl;
     return 0;

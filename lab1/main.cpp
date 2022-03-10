@@ -35,7 +35,7 @@ double logn(double liczba, double krok){
 }
 double arctan(double liczba, double krok){
         // (-1)^(a-1)*(x^(2a-1))/(2a-1); a=2, a=>inf
-    if(krok == 2){
+    if(krok ==2){
         return (-1)*(fastpot(liczba, ((2*krok)-1))/((2*krok)-1));
     }
     return (fastpot(liczba, ((2*krok)-1))/((2*krok)-1));
@@ -43,80 +43,69 @@ double arctan(double liczba, double krok){
 double zad1(double x, int kroki){
     double sumlog = x;
     double sumarc = x;
+    double wynik = 0;
     for(int i=2; i<kroki; i++){
         sumlog += logn(x, i);
         sumarc += arctan(x, i);
+        std::cout<<"log: "<<logn(x,i)<<std::endl<<"arctan: "<<arctan(x,i)<<std::endl;
+
     }
-    return sumarc * sumlog;
+    wynik = sumarc * sumlog;
+    return wynik;
 }
 double zad2(double x, int kroki){
     double sumlog = 0;
     double sumarc = 0;
-    double tablog[kroki+1];
-    double tabarc[kroki+1];
-
-    for(int i=2; i<kroki; i++){
-        tablog[i] = logn(x, i);
-        tabarc[i] = arctan(x, i);
-    }
-    std::cout<<"Obrot"<<std::endl;
+    double wynik = 0;
     for(int i=kroki; i>2; i--){
-        sumlog += tablog[i];
-        sumarc += tabarc[i];
+        sumlog += logn(x, i);
+        sumarc += arctan(x, i);
     }
     sumlog += x;
     sumarc += x;
-    return sumarc * sumlog;
+    wynik = sumarc * sumlog;
+    return wynik;
 }
 double zad3(double x, int kroki){
     double sumlog = 0;
     double sumarc = 0;
     double templog = x;
     double temparc = x;
+    double wynik = 0;
     for(int i=2; i<kroki; i++){
         sumlog += templog;
         sumarc += temparc;
         templog = (-1)*(templog)*(x)*(i-1)/i;
         temparc = temparc*(fastpot(x, 2))*((2*(i-1))-1)/((2*i)-1);
     }
-    return sumlog * sumarc;
+    wynik = sumlog * sumarc;
+    return wynik;
 }
 double zad4(double x, int kroki){
     double sumlog = 0;
     double sumarc = 0;
     double templog = x;
     double temparc = x;
-    double tablog[kroki];
-    double tabarc[kroki];
-    // for(int i=kroki; i>2; i--){
-    //     sumlog += templog;
-    //     sumarc += temparc;
-    //     templog = (-1)*(templog)*(x)*(i-1)/i;
-    //     temparc = temparc*(fastpot(x, 2))*((2*(i-1))-1)/((2*i)-1);
-    // }
-    for(int i=2; i<kroki; i++){
-        tablog[i] = templog;
-        tabarc[i] = temparc;
+    double wynik = 0;
+    for(int i=kroki; i<2; i++){
+        sumlog += templog;
+        sumarc += temparc;
         templog = (-1)*(templog)*(x)*(i-1)/i;
         temparc = temparc*(fastpot(x, 2))*((2*(i-1))-1)/((2*i)-1);
     }
-    for(int i=kroki; i>2; i--){
-        sumlog += tablog[i];
-        sumarc += tabarc[i];
-    }
-    return sumlog * sumarc;
+    wynik = sumlog * sumarc;
+    return wynik;
 }
 int main(int argc, char *argv[])
 {   
     //ln(1 + x) · arctan(x)
     std::cout.precision(20);
     double number = 0.1;
-    int steps = 1000002;
+    int steps = 10;
     double w1;
     double w2;
     double w3;
     double w4;
-    std::cout<<"0.0094994371897874237131657982374337312586560454954487194634"<<std::endl;
     std::cout<<"zad1:"<<std::endl;
     w1 = zad1(number, steps);
     std::cout<<w1<<std::endl;
