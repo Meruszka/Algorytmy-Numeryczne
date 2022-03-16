@@ -3,14 +3,6 @@
 #include <cstdlib>
 #include <windows.h>
 
-double pot(double x, int y){
-    // x^y
-    double wynik = 1;
-    for(int i=0; i<y; i++){
-        wynik = wynik * x;
-    }
-    return wynik;
-}
 // cytat z StackOverflow (dużo szybsza funkcja potęgująca)
 double fastpot(double x, int y){
     double temp;
@@ -30,40 +22,31 @@ double fastpot(double x, int y){
 }
 // koniec cytatu
 
-
-double logn(double liczba, double krok){
-    if(krok == 1){
-        return liczba;
-    }
-    return fastpot(-1, krok-1)*(fastpot(liczba, krok)/(krok));
-}
-double arctan(double liczba, double krok){
-    if(krok == 1){
-        return liczba;
-    }
-    return fastpot(-1, krok-1)*(fastpot(liczba, ((2*krok)-1))/((2*krok)-1));
-}
-
-double zad2(double x, int kroki){
+double zad3(double x, int kroki){
     double sumlog = 0;
     double sumarc = 0;
+    double templog = x;
+    double temparc = x;
     double wynik = 0;
-    for(int i=kroki; i>=1; i--){
-        sumlog += logn(x, i);
-        sumarc += arctan(x, i);
-        std::cout<<"log: "<<logn(x,i)<<std::endl<<"arctan: "<<arctan(x,i)<<std::endl;
+    for(int i=2; i<kroki; i++){
+        sumlog += templog;
+        sumarc += temparc;
+        templog = (-1)*(templog)*(x)*(i-1)/i;
+        temparc = (-1)*temparc*(fastpot(x, 2))*((2*(i-1))-1)/((2*i)-1);
     }
-    wynik = sumarc * sumlog;
+    wynik = sumlog * sumarc;
     return wynik;
 }
+
+
 int main(int argc, char *argv[])
 {   
     //ln(1 + x) · arctan(x)
     std::cout.precision(20);
     double number = 0.1;
-    int kroki = 0;
+    int kroki = 1000;
     std::cin>>kroki;
-    double w = zad2(number, kroki);
+    double w = zad3(number, kroki);
     std::cout<<"0.0094994371897874237131657982374337312586560454954487194634"<<std::endl;
     std::cout<<w<<std::endl;
     return 0;
