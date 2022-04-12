@@ -108,16 +108,25 @@ MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
 template<typename T, int N>
 MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
     int s = this->getSize();
-    for(int i=0; i<s; i++){
 
-    }
     for(int k=0; k<s; k++){
+        for(int j=k+1; j<s; j++){
+            if(macierz[j][k]>macierz[k][k]){
+                T temp[N];
+                std::copy(macierz[j], macierz[j]+N, temp);
+                std::copy(macierz[k], macierz[k]+N, macierz[j]);
+                std::copy(temp, temp+N, macierz[k]);
+                T tempV;
+                tempV = rhs(j);
+                rhs(j) = rhs(k);
+                rhs(k) = tempV;
+            }
+        }
         T pivot = macierz[k][k];
         for(int j=k+1; j<s; j++){
             this->macierz[k][j] = macierz[k][j]/pivot;
         }
         rhs(k) = rhs(k)/pivot;
-        this->Print();
         for(int i=0; i<s; i++){
             if(i == k || this->macierz[i][k]==0){
                     continue;

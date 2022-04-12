@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1649504317 source:c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\main.cpp
+1649791210 source:c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\main.cpp
 	<iostream>
 	<stdlib.h>
 	<time.h>
 	"mojamacierz.h"
 	"mojwektor.h"
 
-1649505398 source:c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\mojamacierz.cpp
+1649790700 source:c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\mojamacierz.cpp
 	<iostream>
 	<string.h>
 	"mojamacierz.h"
@@ -15,7 +15,7 @@
 	"mojwektor.h"
 	"mojamacierz.cpp"
 
-1649788350 c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\mojamacierz.cpp
+1649791897 c:\users\szymon\onedrive\pulpit\2rok4sem\algorytmynumeryczne\algorytmy-numeryczne\algonum2\mojamacierz.cpp
 	<iostream>
 	<string.h>
 	"mojamacierz.h"
