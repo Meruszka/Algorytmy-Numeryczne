@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+
 double pot(double x, int y){
     // x^y
     double wynik = 1.0;
