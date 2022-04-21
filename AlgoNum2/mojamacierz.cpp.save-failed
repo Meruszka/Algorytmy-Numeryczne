@@ -107,7 +107,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
 template<typename T, int N>
 MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
     for(int k=0; k<N; k++){
-
         for(int j=k+1; j<N; j++){
             if(macierz[j][k]>macierz[k][k]){
                 T temp[N];
@@ -137,7 +136,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
             rhs(i) -= f*rhs(k);
         }
     }
-
     return rhs;
 }
 

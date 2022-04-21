@@ -5,9 +5,8 @@
 
 template<typename T, int N>
 class MojaMacierz {
-private:
-    T macierz[N][N];
 public:
+    T macierz[N][N];
     int getSize();
     void setValues(T val[]);
     T& operator()(int& row, int& col);

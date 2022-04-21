@@ -1,10 +1,10 @@
 #ifndef MOJWEKTOR_H
 #define MOJWEKTOR_H
 
-template<typename T, int N> class MojWektor {
-private:
-    T wektor[N];
+template<typename T, int N>
+class MojWektor {
 public:
+    T wektor[N];
     int getSize();
     void setValues(T val[]);
     T& operator()(int& x);
