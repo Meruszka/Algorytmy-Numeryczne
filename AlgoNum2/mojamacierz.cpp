@@ -102,7 +102,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
             rhs(i) -= f*rhs(k);
         }
     }
-    this->Print();
     return rhs;
 }
 template<typename T, int N>
@@ -138,7 +137,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
             rhs(i) -= f*rhs(k);
         }
     }
-    this->Print();
     return rhs;
 }
 

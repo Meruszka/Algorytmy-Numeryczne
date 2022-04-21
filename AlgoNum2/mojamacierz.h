@@ -3,7 +3,8 @@
 
 #include "mojwektor.h"
 
-template<typename T, int N> class MojaMacierz {
+template<typename T, int N>
+class MojaMacierz {
 private:
     T macierz[N][N];
 public:
