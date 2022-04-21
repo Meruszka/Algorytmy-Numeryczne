@@ -90,7 +90,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
             this->macierz[k][j] = macierz[k][j]/pivot;
         }
         rhs(k) = rhs(k)/pivot;
-
         for(int i=0; i<s; i++){
             if(i == k || this->macierz[i][k]==0){
                     continue;
