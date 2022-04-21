@@ -9,7 +9,7 @@
 #include "mojamacierz.h"
 #include "mojwektor.h"
 
-#define SIZE 2000
+#define SIZE 100
 #define RANGE_MIN -65536
 #define RANGE_MAX 65535
 
@@ -48,7 +48,7 @@ double PGD(int seed){
         std::ofstream czas;
         czas.open("Wyniki/Czasy/PGD.csv", std::ios_base::app);
         czas << std::fixed << std::setprecision(20);
-        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start1 - end1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start2 - end2).count() <<"\n";
+        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end1 - start1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end2 - start2).count() <<"\n";
         czas.close();
     // ===============
 
@@ -64,7 +64,7 @@ double GTD(int seed){
     double B[SIZE];
     MojaMacierz<double, SIZE> macierz;
     MojWektor<double, SIZE> wektor;
-    MojWektor<double, SIZE>wynik;
+    MojWektor<double, SIZE> wynik;
     Eigen::VectorXd Xwynik(SIZE);
 
     std::srand(seed);
@@ -91,9 +91,9 @@ double GTD(int seed){
         std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
 
         std::ofstream czas;
-        czas.open("Wyniki/Czasy/PGD.csv", std::ios_base::app);
+        czas.open("Wyniki/Czasy/GTD.csv", std::ios_base::app);
         czas << std::fixed << std::setprecision(20);
-        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start1 - end1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start2 - end2).count() <<"\n";
+        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end1 - start1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end2 - start2).count() <<"\n";
         czas.close();
     // ===============
 
@@ -137,9 +137,9 @@ float PGF(int seed){
         std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
 
         std::ofstream czas;
-        czas.open("Wyniki/Czasy/PGD.csv", std::ios_base::app);
+        czas.open("Wyniki/Czasy/PGF.csv", std::ios_base::app);
         czas << std::fixed << std::setprecision(20);
-        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start1 - end1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start2 - end2).count() <<"\n";
+        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end1 - start1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end2 - start2).count() <<"\n";
         czas.close();
     // ===============
 
@@ -182,9 +182,9 @@ float GTF(int seed){
         std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
 
         std::ofstream czas;
-        czas.open("Wyniki/Czasy/PGD.csv", std::ios_base::app);
+        czas.open("Wyniki/Czasy/GTF.csv", std::ios_base::app);
         czas << std::fixed << std::setprecision(20);
-        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start1 - end1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (start2 - end2).count() <<"\n";
+        czas << SIZE << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end1-start1).count() << "," << std::chrono::duration_cast<std::chrono::nanoseconds> (end2-start2).count() <<"\n";
         czas.close();
     // ===============
     float sum = 0;
