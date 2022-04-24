@@ -35,67 +35,21 @@ void MojaMacierz<T, N>::Print(){
     }
     std::cout<<std::endl;
 }
-template<typename T, int N>
-MojaMacierz<T, N> MojaMacierz<T, N>::operator+=(MojaMacierz<T, N>& rhs){
-    for(int i=0; i<rhs.getSize(); i++){
-        for(int j=0; j<rhs.getSize(); j++){
-           this->macierz[i][j] += rhs(i,j);
-        }
-    }
-    return *this;
-}
-template<typename T, int N>
-MojaMacierz<T, N> MojaMacierz<T, N>::operator*=(MojaMacierz<T, N>& rhs){
-    int x = rhs.getSize();
-    T wynik[x][x];
-    memset(wynik, 0, sizeof(wynik));
-    for(int i=0; i<rhs.getSize(); i++){
-        for(int j=0; j<rhs.getSize(); j++){
-            for(int k=0; k<rhs.getSize(); k++){
-                wynik[i][j] += this->macierz[i][k] * rhs(k,j);
-            }
-        }
-    }
-    this->setValues(wynik);
-    return *this;
-}
 
-
-template<typename T, int N>
-MojWektor<T, N> MojaMacierz<T, N>::operator*=(MojWektor<T, N>& rhs){
-    for(int i=0; i<this->getSize(); i++){
-        for(int j=0; j<this->getSize(); j++){
-            this->macierz[j][i] *= rhs(i);
-        }
-    }
-    int x = rhs.getSize();
-    T wynik[x];
-    memset(wynik, 0, sizeof(wynik));
-    for(int i=0; i<this->getSize(); i++){
-        for(int j=0; j<this->getSize(); j++){
-            wynik[i] += macierz[i][j];
-        }
-    }
-    rhs.setValues(wynik);
-
-    return rhs;
-}
 template<typename T, int N>
 MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
-    int s = this->getSize();
-
-    for(int k=0; k<s; k++){
+    for(int k=0; k<N; k++){
         T pivot = macierz[k][k];
-        for(int j=k+1; j<s; j++){
+        for(int j=k+1; j<N; j++){
             this->macierz[k][j] = macierz[k][j]/pivot;
         }
         rhs(k) = rhs(k)/pivot;
-        for(int i=0; i<s; i++){
+        for(int i=0; i<N; i++){
             if(i == k || this->macierz[i][k]==0){
                     continue;
             }
             T f = this->macierz[i][k];
-            for(int j=k; j<s; j++){
+            for(int j=k; j<N; j++){
                 this->macierz[i][j] -= f*this->macierz[k][j];
             }
             rhs(i) -= f*rhs(k);
@@ -106,7 +60,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::Gauss(MojWektor<T, N>& rhs){
 template<typename T, int N>
 MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
     for(int k=0; k<N; k++){
-
         for(int j=k+1; j<N; j++){
             if(macierz[j][k]>macierz[k][k]){
                 T temp[N];
@@ -136,7 +89,6 @@ MojWektor<T, N>& MojaMacierz<T, N>::PGauss(MojWektor<T, N>& rhs){
             rhs(i) -= f*rhs(k);
         }
     }
-
     return rhs;
 }
 

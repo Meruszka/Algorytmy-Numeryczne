@@ -3,20 +3,18 @@
 #include <stdlib.h>
 #include <random>
 #include <fstream>
-#define EIGEN_STACK_ALLOCATION_LIMIT 0
 #include <Eigen>
 #include<chrono>
 
 #include "mojamacierz.h"
 #include "mojwektor.h"
 
-#define SIZE 1000
+#define SIZE 100
 #define RANGE_MIN -65536
 #define RANGE_MAX 65535
 
-
 template<typename T>
-T PG(int seed, int n){
+T PG(int seed){
     T A[SIZE*SIZE];
     T B[SIZE];
     MojaMacierz<T, SIZE> macierz;
@@ -45,7 +43,7 @@ T PG(int seed, int n){
         std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
         std::chrono::steady_clock::time_point start2 = std::chrono::steady_clock::now();
-            Xwynik = matrix.transpose().colPivHouseholderQr().solve(vec);
+            Xwynik = matrix.transpose().partialPivLu().solve(vec);
         std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
 
         std::ofstream czas;
@@ -57,12 +55,12 @@ T PG(int seed, int n){
 
     T sum = 0;
     for(int i=0; i<SIZE; i++){
-        sum += abs(Xwynik(i)- wynik(i));
+        sum += abs(Xwynik(i) - wynik(i));
     }
     return sum;
 }
 template<typename T>
-T G(int seed, int n){
+T G(int seed){
     T A[SIZE*SIZE];
     T B[SIZE];
     MojaMacierz<T, SIZE> macierz;
@@ -90,8 +88,9 @@ T G(int seed, int n){
         std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
         std::chrono::steady_clock::time_point start2 = std::chrono::steady_clock::now();
-            Xwynik = matrix.transpose().householderQr().solve(vec);
+            Xwynik = matrix.transpose().colPivHouseholderQr().solve(vec);
         std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
+
         std::ofstream czas;
         czas.open("Wyniki/Czasy/GTD.csv", std::ios_base::app);
         czas << std::fixed << std::setprecision(20);
@@ -106,12 +105,13 @@ T G(int seed, int n){
     return sum;
 }
 
+
 int main()
 {
     int seed[10] = {74, 66, 33, 173, 14, 13, 190, 175, 45, 151};
     std::cout<<"START"<<std::endl;
-    double sumGTD = 0, sumPGD = 0;
-    float sumGTF = 0, sumPGF=0;
+    double sumGTD, sumPGD;
+    float sumGTF, sumPGF;
     for(int i=0; i<1; i++){
         sumGTD += G<double>(seed[i]);
         sumPGD += PG<double>(seed[i]);
@@ -119,7 +119,7 @@ int main()
         sumPGF += PG<float>(seed[i]);
     }
     std::ofstream wyniki;
-    wyniki.open("Wyniki/errors.csv", std::ios_base::app);
+    wyniki.open("Wyniki/Błędy.csv", std::ios_base::app);
     wyniki << std::fixed << std::setprecision(20);
     wyniki << SIZE << "," <<sumGTD/10 << "," << sumPGD/10 << "," << sumGTF/10 << "," << sumPGF/10 << "\n";
     wyniki.close();
